@@ -21,7 +21,7 @@ itemFrequencyPlot(groceries, support = 0.1, main = "items with support of 10% or
 #Visualizing transaction data (plotting the sparse matrix)
 image(groceries[1:5])
 #The resulting diagram depicts a matrix with five rows and 169 columns, indicating the five transactions and the 169 possible items we requested
-image(sample(groceries, 100))
+image(sample(groceries, 50))
 #plot the first 100 transactions 
 ru1=apriori(groceries)
 ru1
@@ -35,5 +35,10 @@ inspect(groceryrules)
 inspect(sort(groceryrules, by = "lift")[1:5])
 #looking for rules/itemsets including root vegetables
 # Looking for rules/itemsets including "berries"
-berriesrules <- subset(groceryrules, items %pin% "berries")
-inspect(berriesrules)
+yogurtrules <- subset(groceryrules, items %pin% "yogurt")
+inspect(yogurtrules )
+#visualizing rules according to confidence
+rules=groceryrules
+plot(rules)
+plot(rules, measure = c("support", "lift"), shading = "confidence")
+plot(rules, method = "paracoord")
